@@ -35,6 +35,7 @@
                                                 <option>M.Tech(ECE)</option>
                                                 <option>iM.Tech</option>
                                                 <option>MS.Digisoc</option>
+                                                <option>M.Tech(IT)</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
