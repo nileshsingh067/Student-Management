@@ -3,7 +3,7 @@ package com.nilesh.model;
 public class Student {
 	private int id;
 	private String Name;
-	private String Roll;
+	private long Roll;
 	private String Course;
 	private double p_marks;
 	private double c_marks;
@@ -30,10 +30,10 @@ public class Student {
 	public void setName(String name) {
 		Name = name;
 	}
-	public String getRoll() {
+	public long getRoll() {
 		return Roll;
 	}
-	public void setRoll(String roll) {
+	public void setRoll(long roll) {
 		Roll = roll;
 	}
 	public String getCourse() {

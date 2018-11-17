@@ -4,69 +4,50 @@
 <div id="page-wrapper">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Find Student</h1>
+			<h1 class="page-header">Find Multiple Student's</h1>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
 	<!-- /.row -->
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading">Search Student Details</div>
+			<div class="panel-heading">Find Multiple Student's Details(Grid View)</div>
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-lg-6">
 						<!--  form role="form"-->
 							<div class="form-group">
-								<label>Roll</label> <input class="form-control" id="search_roll"
-									placeholder="Enter Roll Number">
+								<label>From Roll</label> <input class="form-control" id="from_roll"
+									placeholder="Enter From Roll No">
 							</div>
-							<button type="submit" onclick="searchStudent()" class="btn btn-default">Find</button>
+							<div class="form-group">
+								<label>To Roll</label> <input class="form-control" id="to_roll"
+									placeholder="Enter To Roll No">
+							</div>
+							<button type="submit" onclick="searchMultipleStudentD2()" class="btn btn-default">Find</button>
 						<!--  /form-->
 					</div>
 				</div>
 				<div class="row">
 				<div class="col-lg-6">
-				<p id="msg" style="color:red;"></p>
+				
 				</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">Student Details</div>
+							<div class="panel-heading">Students Details</div>
 							<!-- /.panel-heading -->
 							<div class="panel-body">
-								<div class="table-responsive">
-									<table class="table">
-										<thead>
-											<tr>
-											<th>Image </th>
-												<th>Name </th>
-												<th>Roll</th>
-												<th>Physics Mark</th>
-												<th>Chemistry Mark</th>
-												<th>Math Mark</th>
-												<th>Grade</th>
-												<th>Average</th>
-												<th>Percentage(%)</th>
-												
-												
-											</tr>
-										</thead>
-										<tbody>
-											<tr class="success">
-												<td><img id="td_img"  height="100px" width="100px"/></td>
-												<td id="td_name"></td>
-												<td id="td_roll"></td>
-												<td id="td_phy"></td>
-												<td id="td_che"></td>
-												<td id="td_math"></td>
-												<td id="td_grade"></td>
-												<td id="td_avg"></td>
-												<td id="td_per"></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
+								<!--  div class="table-responsive" id="tbl">
+									<p id="msg"></p>
+								</div-->
+								<div class="row show-grid" id="tbl">
+								<p id="msg"></p>
+                                <!--  div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+                                <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+                                <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div-->
+                            </div>
 								<!-- /.table-responsive -->
 							</div>
 							<!-- /.panel-body -->

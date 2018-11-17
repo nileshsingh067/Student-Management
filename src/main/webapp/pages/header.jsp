@@ -35,6 +35,207 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+     <script>
+	function searchSorted() {
+		var from_roll = document.getElementById("from_roll").value;
+		var to_roll = document.getElementById("to_roll").value;
+		var sort_by=document.getElementById("sort_by").value;
+
+		//http://localhost:8080/student/webapi/stud/findByRoll?roll=MT2018069
+		var URI = "http://localhost:" + location.port
+				+ "/student/webapi/stud/findMultipleSorted?from_roll=" + from_roll+"&to_roll="+to_roll+"&sortby="+sort_by;
+		//{"DOB":"2018-10-29 13:20:21.0",
+	//"avg_marks":75.0,"c_marks":74.0,"course":"M Tech(CSE)","id":1,"m_marks":76.0,"name":"Nilesh Kumar",
+	//"p_marks":75.0,"percentage":0.0,"roll":"MT2018069","status":1,"statusMsg":"Done..."};
+		$.ajax({
+			type : 'GET',
+			url : URI,
+			//data: { get_param: 'value' }, 
+			dataType : 'json',
+			success : function(data) {
+				var names = data
+				//$('#name').html(data);
+
+				var tableData = '<table class="table"><thead><tr><th>Image </th><th>Name </th><th>Roll</th><th>Physics Mark</th><th>Chemistry Mark</th><th>Math Mark</th><th>Grade</th></tr></thead><tbody>';
+				$.each(data, function(index, data) {//src="'+$pic+'"
+				$pic= "http://localhost:8080/student/"+ data.photo;
+				tableData += '<tr class="success"><td><img src="'+data.imgPath+'" height="100px" width="100px"/></td><td>'
+				+ data.name + '</td><td>' + data.roll
+				+ '</td> <td>' + data.p_marks + '</td><td>'
+				+ data.c_marks + '</td><td>' + data.m_marks
+				+ '</td> <td>' + data.grade
+				+ '</td></tr>';
+				});
+				tableData += '</tbody></table>';
+				 console.log(tableData);
+				$('tbl2').html(tableData);
+				document.getElementById("msg").innerHTML = tableData;
+
+			}
+		});
+
+	}
+</script>
+     <script>
+	function searchMultipleStudentSorted(sortby) {
+		var from_roll = document.getElementById("from_roll").value;
+		var to_roll = document.getElementById("to_roll").value;
+
+		//http://localhost:8080/student/webapi/stud/findByRoll?roll=MT2018069
+		var URI = "http://localhost:" + location.port
+				+ "/student/webapi/stud/findMultipleSorted?from_roll=" + from_roll+"&to_roll="+to_roll+"&sortby="+sortby;
+		//{"DOB":"2018-10-29 13:20:21.0",
+	//"avg_marks":75.0,"c_marks":74.0,"course":"M Tech(CSE)","id":1,"m_marks":76.0,"name":"Nilesh Kumar",
+	//"p_marks":75.0,"percentage":0.0,"roll":"MT2018069","status":1,"statusMsg":"Done..."};
+		$.ajax({
+			type : 'GET',
+			url : URI,
+			//data: { get_param: 'value' }, 
+			dataType : 'json',
+			success : function(data) {
+				var names = data
+				//$('#name').html(data);
+
+				var tableData = '<table class="table"><thead><tr><th>Image </th><th>Name </th><th>Roll</th><th>Physics Mark</th><th>Chemistry Mark</th><th>Math Mark</th><th>Grade</th></tr></thead><tbody>';
+				$.each(data, function(index, data) {//src="'+$pic+'"
+				$pic= "http://localhost:8080/student/"+ data.photo;
+				tableData += '<tr class="success"><td><img src="'+data.imgPath+'" height="100px" width="100px"/></td><td>'
+				+ data.name + '</td><td>' + data.roll
+				+ '</td> <td>' + data.p_marks + '</td><td>'
+				+ data.c_marks + '</td><td>' + data.m_marks
+				+ '</td> <td>' + data.grade
+				+ '</td></tr>';
+				});
+				tableData += '</tbody></table>';
+				 console.log(tableData);
+				$('tbl2').html(tableData);
+				document.getElementById("msg").innerHTML = tableData;
+
+			}
+		});
+
+	}
+</script>
+    <script>
+	function searchMultipleStudent() {
+		var from_roll = document.getElementById("from_roll").value;
+		var to_roll = document.getElementById("to_roll").value;
+
+		//http://localhost:8080/student/webapi/stud/findByRoll?roll=MT2018069
+		var URI = "http://localhost:" + location.port
+				+ "/student/webapi/stud/findMultiple?from_roll=" + from_roll+"&to_roll="+to_roll;
+		//{"DOB":"2018-10-29 13:20:21.0",
+	//"avg_marks":75.0,"c_marks":74.0,"course":"M Tech(CSE)","id":1,"m_marks":76.0,"name":"Nilesh Kumar",
+	//"p_marks":75.0,"percentage":0.0,"roll":"MT2018069","status":1,"statusMsg":"Done..."};
+		$.ajax({
+			type : 'GET',
+			url : URI,
+			//data: { get_param: 'value' }, 
+			dataType : 'json',
+			success : function(data) {
+				var names = data
+				//$('#name').html(data);
+
+				var tableData = '<table class="table"><thead><tr><th>Image </th><th>Name </th><th>Roll</th><th>Physics Mark</th><th>Chemistry Mark</th><th>Math Mark</th><th>Grade</th></tr></thead><tbody>';
+				$.each(data, function(index, data) {//src="'+$pic+'"
+				$pic= "http://localhost:8080/student/"+ data.photo;
+				tableData += '<tr class="success"><td><img src="'+data.imgPath+'" height="100px" width="100px"/></td><td>'
+				+ data.name + '</td><td>' + data.roll
+				+ '</td> <td>' + data.p_marks + '</td><td>'
+				+ data.c_marks + '</td><td>' + data.m_marks
+				+ '</td> <td>' + data.grade
+				+ '</td></tr>';
+				});
+				tableData += '</tbody></table>';
+				 console.log(tableData);
+				$('tbl2').html(tableData);
+				document.getElementById("msg").innerHTML = tableData;
+
+			}
+		});
+
+	}
+</script>
+ <script>
+	function searchMultipleStudentD2() {
+		var from_roll = document.getElementById("from_roll").value;
+		var to_roll = document.getElementById("to_roll").value;
+
+		//http://localhost:8080/student/webapi/stud/findByRoll?roll=MT2018069
+		var URI = "http://localhost:" + location.port
+				+ "/student/webapi/stud/findMultiple?from_roll=" + from_roll+"&to_roll="+to_roll;
+		//{"DOB":"2018-10-29 13:20:21.0",
+	//"avg_marks":75.0,"c_marks":74.0,"course":"M Tech(CSE)","id":1,"m_marks":76.0,"name":"Nilesh Kumar",
+	//"p_marks":75.0,"percentage":0.0,"roll":"MT2018069","status":1,"statusMsg":"Done..."};
+		$.ajax({
+			type : 'GET',
+			url : URI,
+			//data: { get_param: 'value' }, 
+			dataType : 'json',
+			success : function(data) {
+				var names = data
+				//$('#name').html(data);
+//	 <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+				var tableData = '';
+				$.each(data, function(index, data) {//src="'+$pic+'"
+				$pic= "http://localhost:8080/student/"+ data.photo;
+				tableData += '<div class="col-xs-6 col-md-4"><table><tr><td><img src="'+data.imgPath+'" height="100px" width="100px"/></td></tr><tr><td>Name : '
+				+ data.name + '</td></tr></tr><td>Roll : ' + data.roll
+				+ '</td> </tr></tr><td>Physics Marks : ' + data.p_marks + '</td></tr></tr><td>Chemistry Marks : '
+				+ data.c_marks + '</td></tr></tr><td>Math Marks : ' + data.m_marks
+				+ '</td></tr></tr> <td>Grade : ' + data.grade
+				+ '</td></tr></table></div>';
+				});
+				tableData += '';
+				 console.log(tableData);
+				$('tbl2').html(tableData);
+				document.getElementById("msg").innerHTML = tableData;
+
+			}
+		});
+
+	}
+</script>
+<script>
+	function searchMultipleStudent1() {
+		var from_roll = document.getElementById("from_roll").value;
+		var to_roll = document.getElementById("to_roll").value;
+
+		//http://localhost:8080/student/webapi/stud/findByRoll?roll=MT2018069
+		var URI = "http://localhost:" + location.port
+				+ "/student/webapi/stud/findMultiple?from_roll=" + from_roll+"&to_roll="+to_roll;
+		//{"DOB":"2018-10-29 13:20:21.0",
+	//"avg_marks":75.0,"c_marks":74.0,"course":"M Tech(CSE)","id":1,"m_marks":76.0,"name":"Nilesh Kumar",
+	//"p_marks":75.0,"percentage":0.0,"roll":"MT2018069","status":1,"statusMsg":"Done..."};
+		$.ajax({
+			type : 'GET',
+			url : URI,
+			//data: { get_param: 'value' }, 
+			dataType : 'json',
+			success : function(data) {
+				var names = data
+				//$('#name').html(data);
+
+				var tableData = '<table class="table"><thead><tr><th>Name </th><th>Roll</th><th>Physics Mark</th><th>Chemistry Mark</th><th>Math Mark</th><th>Grade</th></tr></thead><tbody>';
+				$.each(data, function(index, data) {//src="'+$pic+'"
+				$pic= "http://localhost:8080/student/"+ data.photo;
+				tableData += '<tr class="success"><td>'
+				+ data.name + '</td><td>' + data.roll
+				+ '</td> <td>' + data.p_marks + '</td><td>'
+				+ data.c_marks + '</td><td>' + data.m_marks
+				+ '</td> <td>' + data.grade
+				+ '</td></tr>';
+				});
+				tableData += '</tbody></table>';
+				 console.log(tableData);
+				$('tbl2').html(tableData);
+				document.getElementById("msg").innerHTML = tableData;
+
+			}
+		});
+
+	}
+</script>
 <script>
 	function searchStudent() {
 		var roll = document.getElementById("search_roll").value;
@@ -54,11 +255,10 @@
 				if(data.status==1){
 				document.getElementById("td_name").innerHTML = data.name;
 				document.getElementById("td_roll").innerHTML = data.roll;
-				document.getElementById("td_course").innerHTML = data.course;
 				document.getElementById("td_phy").innerHTML = data.p_marks;
 				document.getElementById("td_che").innerHTML = data.c_marks;
 				document.getElementById("td_math").innerHTML = data.m_marks;
-				document.getElementById("td_dob").innerHTML = data.grade;
+				document.getElementById("td_grade").innerHTML = data.grade;
 				document.getElementById("td_avg").innerHTML = data.avg_marks;
 				document.getElementById("td_per").innerHTML = data.avg_marks;
 				document.getElementById("msg").innerHTML = data.statusMsg;
@@ -284,8 +484,12 @@ var c_m=document.getElementById("ip_cm").value;
 								<li><a href="addStudent.jsp">Add Student</a></li>
 								<li><a href="findStudent.jsp">Find Students</a></li>
 								<li><a href="updateName.jsp">Update Name</a></li>
-								<li><a href="updateCourse.jsp">Upadte Course</a></li>
-								<li><a href="updateImage">Update Image</a></li>
+								<li><a href="findMultipleD1.jsp">Find Multiple Students(D1)</a></li>
+								<li><a href="findMultipleD2.jsp">Find Multiple Students(D2)</a></li>
+								<li><a href="findMultipleE1.jsp">Sort By Name(E1)</a></li>
+								<li><a href="findMultipleE2.jsp">Sort By Grade(E2)</a></li>
+								<li><a href="findMultipleE3.jsp">Sort By Marks(E3)</a></li>
+								<li><a href="findMultipleF.jsp">Sort By Input(F)</a></li>
 							</ul> <!-- /.nav-second-level --></li>
 					</ul>
 				</div>

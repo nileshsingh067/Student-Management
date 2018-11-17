@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -21,6 +23,10 @@ import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import com.nilesh.DAO.StudentDAO;
 import com.nilesh.model.Student;
+import com.nilesh.model.comparator.SortByGrade;
+import com.nilesh.model.comparator.SortByMarks;
+import com.nilesh.model.comparator.SortByName;
+import com.nilesh.model.comparator.SortByRoll;
 
 @Path("/stud")
 public class StudentService {
@@ -37,9 +43,40 @@ public class StudentService {
 		return stDAO.getAllStudents();
 		
 	}
+	@GET @Path("/findMultiple")
+	@Produces({"application/json", "application/xml"})
+	public List<Student> FindMultipleStudents(@QueryParam("from_roll") @DefaultValue("-1") long from_roll,
+			@QueryParam("to_roll") @DefaultValue("-1") long to_roll) {
+		StudentDAO stDAO=new StudentDAO();
+		return stDAO.getStudentsBetween(from_roll, to_roll);
+		
+	}
+	@GET @Path("/findMultipleSorted")
+	@Produces({"application/json", "application/xml"})
+	public List<Student> FindMultipleStudentsSorted(@QueryParam("from_roll") @DefaultValue("-1") long from_roll,
+			@QueryParam("to_roll") @DefaultValue("-1") long to_roll,
+			@QueryParam("sortby") @DefaultValue("name") String sortby) {
+		StudentDAO stDAO=new StudentDAO();
+		List<Student> stList=stDAO.getStudentsBetween(from_roll, to_roll);
+		System.out.println("Sorting Criteria :: "+sortby);
+		if(sortby.equalsIgnoreCase("name")) {
+			Collections.sort(stList, new SortByName()); 
+		}
+		else if(sortby.equalsIgnoreCase("grade")) {
+			Collections.sort(stList, new SortByGrade());
+		}
+		else if(sortby.equalsIgnoreCase("marks")) {
+			Collections.sort(stList, new SortByMarks());
+		}else if(sortby.equalsIgnoreCase("roll")) {
+			Collections.sort(stList, new SortByRoll());
+		}
+		
+		return stList;
+		
+	}
 	@GET @Path("/findByRoll")
 	@Produces({"application/json", "application/xml"})
-	public Student FindByRoll(@QueryParam("roll") String roll) {
+	public Student FindByRoll(@QueryParam("roll") long roll) {
 		StudentDAO stDAO=new StudentDAO();
 		Student st=new Student();
 		st.setRoll(roll);
@@ -50,7 +87,7 @@ public class StudentService {
 	@Produces({"application/json", "application/xml"})
 	public Student addEmployee(
 			@QueryParam("name") String name,
-			@QueryParam("roll") String roll,
+			@QueryParam("roll") long roll,
 			@QueryParam("dob") String dob,
 			@QueryParam("pm") double pm,
 			@QueryParam("cm") double cm,
@@ -76,7 +113,7 @@ public class StudentService {
 	@Produces({"application/json", "application/xml"})
 	public Student updateName(
 			@QueryParam("name") String name,
-			@QueryParam("roll") String roll
+			@QueryParam("roll") long roll
 			){
 		
 		
@@ -94,7 +131,7 @@ public class StudentService {
 	@Produces({"application/json", "application/xml"})
 	public Student updateCourse(
 			@QueryParam("course") String course,
-			@QueryParam("roll") String roll
+			@QueryParam("roll") long roll
 			){
 		
 		
@@ -111,37 +148,37 @@ public class StudentService {
 	@POST @Path("/addStudent")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces({"application/json", "application/xml"})
-	public String addNewStudents(
+	public Student addNewStudents(
 			@FormDataParam("file") InputStream uploadedInputStream,
 			@FormDataParam("file") FormDataContentDisposition fileDetail,
-			@FormDataParam("ip_name") String name,
-			@FormDataParam("ip_roll") String roll,
-			@FormDataParam("dob") String dob,
-			@FormDataParam("ip_pm") double pm,
-			@FormDataParam("ip_cm") double cm,
-			@FormDataParam("ip_mm") double mm,
-			@FormDataParam("ip_course") String course){
+			@FormDataParam("ip_name") @DefaultValue("") String name,
+			@FormDataParam("ip_roll") @DefaultValue("-1") long roll,
+			@FormDataParam("ip_pm") @DefaultValue("-1") double pm ,
+			@FormDataParam("ip_cm") @DefaultValue("-1") double cm,
+			@FormDataParam("ip_mm") @DefaultValue("-1") double mm){
 		
 		
 		
 		Student st=new Student();
 		st.setName(name);
 		st.setRoll(roll);
-		st.setCourse(course);
 		st.setP_marks(pm);
 		st.setC_marks(cm);
 		st.setM_marks(mm);
-		st.setDOB(dob);
 		StudentDAO stDAO=new StudentDAO();
 		String uploadedFileLocation = "/home/nilesh/eclipse-workspace/student/src/main/webapp/img/" + fileDetail.getFileName();
 
 		// save it
-		writeToFile(uploadedInputStream, uploadedFileLocation);
+		
 
 		String output = "File uploaded to : " + uploadedFileLocation+" name : "+name+" roll : "+roll;
 		st.setImgPath("../img/"+fileDetail.getFileName());
+		st=stDAO.validateData(st,uploadedInputStream,fileDetail);
+		if(st.getStatus()==1) {
 		st=stDAO.addStudents(st);
-		return st.toString();
+		if(st.getStatus()==1)writeToFile(uploadedInputStream, uploadedFileLocation);
+		}
+		return st;
 		
 	}
 	// save uploaded file to new location

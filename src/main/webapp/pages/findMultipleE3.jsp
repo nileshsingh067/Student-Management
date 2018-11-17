@@ -4,36 +4,52 @@
 <div id="page-wrapper">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Update Student Details</h1>
+			<h1 class="page-header">Find Multiple Student's</h1>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
 	<!-- /.row -->
 	<div class="col-lg-12">
 		<div class="panel panel-default">
-			<div class="panel-heading">Search Student Details</div>
+			<div class="panel-heading">Find Multiple Student's Details(Sort By Marks)</div>
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-lg-6">
 						<!--  form role="form"-->
 							<div class="form-group">
-								<label>Roll</label> <input class="form-control" id="update_roll"
-									placeholder="Enter Roll No">
+								<label>From Roll</label> <input class="form-control" id="from_roll"
+									placeholder="Enter From Roll No">
 							</div>
 							<div class="form-group">
-								<label>Name</label> <input class="form-control" id="update_name"
-									placeholder="Enter Name To Be Update">
+								<label>To Roll</label> <input class="form-control" id="to_roll"
+									placeholder="Enter To Roll No">
 							</div>
-							<button type="submit" onclick="updateStudentName()" class="btn btn-default">Update</button>
+							<button type="submit" onclick="searchMultipleStudentSorted('marks')" class="btn btn-default">Find</button>
 						<!--  /form-->
 					</div>
 				</div>
 				<div class="row">
 				<div class="col-lg-6">
-				<p id="msg" style="color:red;"></p>
+				
 				</div>
 				</div>
-
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">Students Details</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<div class="table-responsive" id="tbl">
+									<p id="msg"></p>
+								</div>
+								<!-- /.table-responsive -->
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<!-- /.col-lg-6 -->
+				</div>
 			</div>
 		</div>
 	</div>

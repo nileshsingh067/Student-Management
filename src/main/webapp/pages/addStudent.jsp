@@ -22,21 +22,11 @@
                                     <form role="form" method="POST" enctype="multipart/form-data" id="fileUploadForm">
                                         <div class="form-group">
                                             <label>Name</label>
-                                            <input type="text" class="form-control" name="ip_name" id="ip_name" placeholder="Enter Full Name" required="true"/>
+                                            <input type="text" class="form-control" name="ip_name" id="ip_name" placeholder="Enter Full Name" required/>
                                         </div>
                                         <div class="form-group">
                                             <label>Roll</label>
                                             <input type="text" class="form-control" name="ip_roll" id="ip_roll" placeholder="Enter Roll Name" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Selects Course</label>
-                                            <select class="form-control" name="ip_course" id="ip_course">
-                                                <option>M.Tech(CSE)</option>
-                                                <option>M.Tech(ECE)</option>
-                                                <option>iM.Tech</option>
-                                                <option>MS.Digisoc</option>
-                                                <option>M.Tech(IT)</option>
-                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label>Physics Mark</label>
