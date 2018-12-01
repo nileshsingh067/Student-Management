@@ -15,10 +15,10 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Enter Student Details</div>
 				<div class="panel-body">
+				<form role="form" method="POST" enctype="multipart/form-data" id="fileUploadForm">
 					<div class="row">
 						<div class="col-lg-3">
-							<form role="form" method="POST" enctype="multipart/form-data"
-								id="fileUploadForm">
+							
 								<div class="form-group">
 									<label>Name</label> <input type="text" class="form-control" 
 										name="ip_name" id="ip_name"  placeholder="Enter Full Name"
@@ -35,7 +35,7 @@
 										placeholder="Enter Physics Marks" required>
 								</div>
 
-							</form>
+						
 						</div>
 						<!-- /.col-lg-6 (nested) -->
 						<div class="col-lg-3">
@@ -49,11 +49,16 @@
 									placeholder="Enter Chemistry Marks" required>
 							</div>
 							<div class="form-group">
+								<label>Password</label> <input type="password"
+									class="form-control" id="pass" name="pass" required>
+							</div>
+						</div>
+							<div class="col-lg-3">
+							<div class="form-group">
 								<label>Upload Image</label> <input type="file"
 									class="form-control" id="file" name="file" required>
 							</div>
-						</div>
-						
+							</div>
 
 
 
@@ -70,6 +75,7 @@
 							<p id="result" style="color: red;"></p>
 						</div>
 					<!-- /.panel-body -->
+					</form>
 				</div>
 				<!-- /.panel -->
 			</div>
@@ -106,7 +112,7 @@ $(document).ready(function () {
 
 		// Create an FormData object 
         var data = new FormData(form);
-
+        console.log("DATA : ", data);
 		// If you want to add an extra field for the FormData
        // data.append("CustomField", "This is some extra data, testing");
 

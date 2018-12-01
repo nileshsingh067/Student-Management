@@ -374,10 +374,8 @@ $(document).ready(function(){
 				$.each(data, function(index, data) {//src="'+$pic+'"
 				$pic= "http://localhost:8080/student/"+ data.photo;
 				tableData += '<div class="col-xs-6 col-md-4"><table><tr><td><img src="'+data.imgPath+'" height="100px" width="100px"/></td></tr><tr><td>Name : '
-				+ data.name + '</td></tr></tr><td>Roll : ' + data.roll
-				+ '</td> </tr></tr><td>Physics Marks : ' + data.p_marks + '</td></tr></tr><td>Chemistry Marks : '
-				+ data.c_marks + '</td></tr></tr><td>Math Marks : ' + data.m_marks
-				+ '</td></tr></tr> <td>Grade : ' + data.grade
+				+ data.name + '</td></tr><tr><td>Roll : ' + data.roll
+				+ '</td> </tr><tr> <td>Grade : ' + data.grade
 				+ '</td></tr></table></div>';
 				});
 				tableData += '';
@@ -647,7 +645,7 @@ var c_m=document.getElementById("ip_cm").value;
 					<ul class="dropdown-menu dropdown-user">
 						<li><a href="#"><i class="fa fa-user fa-fw"></i> Students
 								Profile</a></li>
-						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+						<li><a href="login.jsp"><i class="fa fa-gear fa-fw"></i> Logout</a>
 						</li>
 						<li class="divider"></li>
 						<li><a href="chat.jsp"><i class="fa fa-sign-out fa-fw"></i>

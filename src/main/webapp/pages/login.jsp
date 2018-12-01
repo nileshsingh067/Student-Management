@@ -1,6 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
+<% String msg=request.getParameter("msg");
+if(msg==null||msg.length()<=0||msg==""){
+	msg="";
+	
+}
+System.out.println("login.jsp");
+%>
 <head>
 
     <meta charset="utf-8">
@@ -45,7 +53,7 @@
                         <form role="form" action="logincheck.jsp">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="uname" type="email" autofocus>
+                                    <input class="form-control" placeholder="UserName" name="uname" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" name="pass" type="password" value="">
@@ -56,11 +64,15 @@
                                     </label>
                                 </div>
                                 <!-- Change this to a button or input when using this as a form -->
-                                <a href="index.jsp" class="btn btn-lg btn-success btn-block">Login</a>
+                                <button type="submit" class="btn btn-default" id="btnSubmit">Submit</button>
                             </fieldset>
                         </form>
                     </div>
+                  
                 </div>
+                  <div class="row">
+                    <p><%=msg %></p>
+                    </div>
             </div>
         </div>
     </div>
@@ -80,3 +92,4 @@
 </body>
 
 </html>
+    
