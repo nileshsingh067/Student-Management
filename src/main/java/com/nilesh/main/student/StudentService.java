@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Singleton;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
@@ -16,6 +18,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
@@ -71,6 +74,29 @@ public class StudentService {
 			Collections.sort(stList, new SortByRoll());
 		}
 		
+		return stList;
+		
+	}
+	@GET @Path("/findMultipleByMarks")
+	@Produces({"application/json", "application/xml"})
+	public List<Student> FindMultipleStudentsByMarks(@QueryParam("from_marks") @DefaultValue("0.0") double from_roll,
+			@QueryParam("to_marks") @DefaultValue("100.0") double to_roll,
+			@QueryParam("find_by") @DefaultValue("Physics") String sortby) {
+		StudentDAO stDAO=new StudentDAO();
+		List<Student> stList=stDAO.getStudentsBetweenMarks(from_roll, to_roll,sortby);
+	System.out.println("Sorting Criteria :: "+sortby);
+	/*	if(sortby.equalsIgnoreCase("name")) {
+			Collections.sort(stList, new SortByName()); 
+		}
+		else if(sortby.equalsIgnoreCase("grade")) {
+			Collections.sort(stList, new SortByGrade());
+		}
+		else if(sortby.equalsIgnoreCase("marks")) {
+			Collections.sort(stList, new SortByMarks());
+		}else if(sortby.equalsIgnoreCase("roll")) {
+			Collections.sort(stList, new SortByRoll());
+		}
+		*/
 		return stList;
 		
 	}
@@ -178,6 +204,63 @@ public class StudentService {
 		st=stDAO.addStudents(st);
 		if(st.getStatus()==1)writeToFile(uploadedInputStream, uploadedFileLocation);
 		}
+		return st;
+		
+	}
+	
+	/*@POST @Path("/update")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces({"application/json", "application/xml"})
+	public Student updateAll(
+			Student st){
+		
+		
+		/*
+		Student st=new Student();
+		st.setName(name);
+		st.setRoll(roll);
+		st.setP_marks(pm);
+		st.setC_marks(cm);
+		st.setM_marks(mm);*/
+		//StudentDAO stDAO=new StudentDAO();
+		//String uploadedFileLocation = "/home/nilesh/eclipse-workspace/student/src/main/webapp/img/" + fileDetail.getFileName();
+
+		// save it
+		
+		//System.out.println("Recieved Data :: "+st.toString());
+		//System.out.println(servletRequest.getQueryString());
+		//String output = "File uploaded to : " + uploadedFileLocation+" name : "+name+" roll : "+roll;
+		//st.setImgPath("../img/"+fileDetail.getFileName());
+	/*	st=stDAO.validateData(st,null,null);
+		if(st.getStatus()==1) {
+		st=stDAO.addStudents(st);
+		}
+		return st;
+		
+	}*/
+	@GET @Path("/update")
+	@Produces({"application/json", "application/xml"})
+	public Student updateEmployee(
+			@QueryParam("name") String name,
+			@QueryParam("roll") long roll,
+			@QueryParam("p_marks") double pm,
+			@QueryParam("c_marks") double cm,
+			@QueryParam("m_marks") double mm){
+		
+		
+		
+		Student st=new Student();
+		st.setName(name);
+		st.setRoll(roll);
+		st.setP_marks(pm);
+		st.setC_marks(cm);
+		st.setM_marks(mm);
+		System.out.println("Recieved Data :: "+st.toString());
+		StudentDAO stDAO=new StudentDAO();
+		st=stDAO.validateData(st);
+		if(st.getStatus()==1) {
+			st=stDAO.updateStudents(st);
+			}
 		return st;
 		
 	}

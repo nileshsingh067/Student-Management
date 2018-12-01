@@ -14,7 +14,7 @@
 			<div class="panel-heading">Find Multiple Student's Details</div>
 			<div class="panel-body">
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-3">
 						<!--  form role="form"-->
 							<div class="form-group">
 								<label>From Roll</label> <input class="form-control" id="from_roll"
@@ -25,11 +25,15 @@
 									placeholder="Enter To Roll No">
 							</div>
 							<button type="submit" onclick="searchMultipleStudent()" class="btn btn-default">Find</button>
-						<!--  /form-->
+						<!--  /form--><%
+						
+						
+					
+						%>
 					</div>
 				</div>
 				<div class="row">
-				<div class="col-lg-6">
+				<div class="col-lg-3">
 				
 				</div>
 				</div>

@@ -14,7 +14,7 @@
 			<div class="panel-heading">Search Student Details</div>
 			<div class="panel-body">
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-3">
 						<!--  form role="form"-->
 							<div class="form-group">
 								<label>Roll</label> <input class="form-control" id="update_roll"
