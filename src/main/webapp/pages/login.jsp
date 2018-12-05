@@ -53,7 +53,7 @@ System.out.println("login.jsp");
                         <form role="form" action="logincheck.jsp">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="UserName" name="uname" type="text" autofocus>
+                                    <input class="form-control" placeholder="UserName" name="uname" type="text" autocomplete="off" >
                                 </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Password" name="pass" type="password" value="">
