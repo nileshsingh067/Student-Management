@@ -181,7 +181,8 @@ public class StudentService {
 			@FormDataParam("ip_roll") @DefaultValue("-1") long roll,
 			@FormDataParam("ip_pm") @DefaultValue("-1") double pm ,
 			@FormDataParam("ip_cm") @DefaultValue("-1") double cm,
-			@FormDataParam("ip_mm") @DefaultValue("-1") double mm){
+			@FormDataParam("ip_mm") @DefaultValue("-1") double mm,
+			@FormDataParam("pass") @DefaultValue("na") String pass){
 		
 		
 		
@@ -191,6 +192,7 @@ public class StudentService {
 		st.setP_marks(pm);
 		st.setC_marks(cm);
 		st.setM_marks(mm);
+		st.setPassword(pass);
 		StudentDAO stDAO=new StudentDAO();
 		String uploadedFileLocation = "/home/nilesh/eclipse-workspace/student/src/main/webapp/img/" + fileDetail.getFileName();
 

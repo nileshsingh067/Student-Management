@@ -15,6 +15,7 @@ public class Student {
 	private String statusMsg;
 	private String grade;
 	private String imgPath;
+	private String password;
 	public Student() {
 		// TODO Auto-generated constructor stub
 	}
@@ -104,6 +105,13 @@ public class Student {
 	}
 	public void setImgPath(String imgPath) {
 		this.imgPath = imgPath;
+	}
+	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	@Override
 	public String toString() {

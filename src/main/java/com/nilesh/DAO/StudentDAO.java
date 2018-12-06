@@ -39,9 +39,9 @@ public class StudentDAO {
 					con=DBconn.getDBConnection("root", "admin");
 					if(con!=null) {
 						Statement st=con.createStatement();
-						String sql="insert into tb_Student(s_name,s_roll,s_pmarks,s_cmarks,s_mmarks,s_imgpath) "
+						String sql="insert into tb_Student(s_name,s_roll,s_pmarks,s_cmarks,s_mmarks,s_imgpath,password) "
 								+ "values('"+s.getName()+"','"+s.getRoll()+"',"+s.getP_marks()+""
-								+ ","+s.getC_marks()+","+s.getM_marks()+",'"+s.getImgPath()+"');";
+								+ ","+s.getC_marks()+","+s.getM_marks()+",'"+s.getImgPath()+"','"+s.getPassword()+"');";
 						result=st.executeUpdate(sql);
 						if(result>0) {
 							s.setStatus(1);
@@ -407,6 +407,74 @@ public class StudentDAO {
 		return s;	
 	}
 
+	public Student checklogin(String userName,String password) {
+		DBConnection DBconn=new DBConnection();
+		Connection con=null;
+		Student s=new Student();
+		s.setStatus(0);
+		s.setStatusMsg("Running...");
+		int result=0;
+		try {
+			con=DBconn.getDBConnection("root", "admin");
+			if(con!=null) {
+				Statement st=con.createStatement();
+				String sql="select s_id,s_name,s_roll,s_pmarks,s_cmarks,s_mmarks,s_imgpath from tb_Student where s_roll='"+userName+"' and password='"+password+"';";
+				ResultSet rs=st.executeQuery(sql);
+				System.out.println("getStudentByRoll Sql :: "+sql);
+				if(rs.next()){
+					s.setId(rs.getInt("s_id"));
+					s.setName(rs.getString("s_name"));
+					s.setRoll(rs.getLong("s_roll"));
+					s.setP_marks(rs.getDouble("s_pmarks"));
+					s.setC_marks(rs.getDouble("s_cmarks"));
+					s.setM_marks(rs.getDouble("s_mmarks"));
+					s.setImgPath(rs.getString("s_imgpath"));
+					s.setAvg_marks(Math.round(((s.getP_marks()+s.getC_marks()+s.getM_marks())/3)*100.0)/100.0);
+					if(s.getAvg_marks()>=90) {s.setGrade("A");}
+					else if(s.getAvg_marks()>=80&&s.getAvg_marks()<90){s.setGrade("B");}
+					else if(s.getAvg_marks()>=70&&s.getAvg_marks()<80){s.setGrade("C");}
+					else {s.setGrade("D");}
+					s.setStatus(1);
+					s.setStatusMsg("Data Found.");
+				}else{
+					s.setStatus(0);
+					s.setStatusMsg("Not Found.");
+				}
+				if(rs!=null)rs=null;
+				if(st!=null)st.close();
+
+			}else {
+				result=-2;
+				s.setStatus(-2);
+				s.setStatusMsg("Fail To Creating mysql Connection");
+				System.out.println("Fail To Creating mysql Connection");
+
+			}
+
+		}catch(Exception ex) {
+			result=-1;
+			s.setStatus(-1);
+			s.setStatusMsg("Exception occured While Creating mysql Connection :: "+ex);
+			System.out.println("Exception occured While Creating mysql Connection :: "+ex);
+
+
+		}finally {
+			if(con!=null) {
+				try {
+					con.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+
+
+		}
+
+		return s;	
+	}
+	
+	
 	public Student updateStudents(Student s,int action) {
 		DBConnection DBconn=new DBConnection();
 		Connection con=null;
@@ -481,6 +549,9 @@ public class StudentDAO {
 		}else if(fileDetail.getFileName()==null||fileDetail.getFileName().length()<=0) {
 			s.setStatus(-100);
 			s.setStatusMsg("Invalid Image File !");
+		}else if(s.getPassword()==null||s.getPassword().length()<=0) {
+			s.setStatus(-100);
+			s.setStatusMsg("Invalid Password !");
 		}/*else if(fileDetail.getFileName().split(regex)) {
 			s.setStatus(-100);
 			s.setStatusMsg("Invalid Image File !");
