@@ -75,27 +75,32 @@
 			<artifactId>activation</artifactId>
 			<version>1.1.1</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>javax.websocket</groupId>
 			<artifactId>javax.websocket-api</artifactId>
 			<version>${websocket.version}</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- Used to serialize the message from the browser -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>${jackson.version}</version>
 		</dependency>
-    	
-		
+
+
 	</dependencies>
 	<properties>
 		<jersey.version>2.26</jersey.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<websocket.version>1.1</websocket.version>
-        <jackson.version>2.6.4</jackson.version>
+		<jackson.version>2.6.4</jackson.version>
 	</properties>
 </project>

@@ -13,7 +13,7 @@ public class DBConnection {
 		Connection con=null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/utility",user, pass);
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/utility","root", "admin");
 		}catch(Exception e) {
 			System.out.println("Exception occured While Creating mysql Connection");
 		}
